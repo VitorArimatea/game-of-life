@@ -113,7 +113,7 @@ const GameOfLife: React.FC = () => {
           ))
         )}
       </div>
-      <div>
+      <div className="buttons">
         {!running ? (
           <button onClick={handleStart}>Iniciar</button>
         ) : (
