@@ -92,6 +92,7 @@ const GameOfLife: React.FC = () => {
 
   return (
     <div>
+      <h1>Jogo da vida</h1>
       <div
         style={{
           display: "grid",
