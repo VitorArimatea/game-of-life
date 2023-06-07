@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import '../index.css'
 
 const GRID_SIZE = 10;
 const CELL_SIZE = 30;
@@ -24,7 +23,7 @@ const GameOfLife: React.FC = () => {
 
   const handleCellClick = (row: number, col: number) => {
     if (!runningRef.current) {
-      const newGrid = [...grid];
+      const newGrid = grid.map((row) => [...row]);
       newGrid[row][col] = !newGrid[row][col];
       setGrid(newGrid);
     }
@@ -71,9 +70,8 @@ const GameOfLife: React.FC = () => {
   useEffect(() => {
     if (running) {
       const intervalId = setInterval(() => {
-        const newGrid = [];
+        const newGrid = grid.map((row) => [...row]);
         for (let row = 0; row < GRID_SIZE; row++) {
-          newGrid[row] = [];
           for (let col = 0; col < GRID_SIZE; col++) {
             const neighbors = countNeighbors(row, col);
             if (grid[row][col]) {
@@ -94,7 +92,6 @@ const GameOfLife: React.FC = () => {
 
   return (
     <div>
-      <h1>Jogo da vida</h1>
       <div
         style={{
           display: "grid",
@@ -102,7 +99,7 @@ const GameOfLife: React.FC = () => {
         }}
       >
         {grid.map((row, rowIndex) =>
-          row.map((col, colIndex) => (
+          row.map((_, colIndex) => (
             <div
               key={`${rowIndex}-${colIndex}`}
               style={{
@@ -116,7 +113,7 @@ const GameOfLife: React.FC = () => {
           ))
         )}
       </div>
-      <div className="buttons">
+      <div>
         {!running ? (
           <button onClick={handleStart}>Iniciar</button>
         ) : (
